@@ -84,6 +84,7 @@ class BrowserSettings extends Observable {
     private boolean landscapeOnly;
     private boolean loadsPageInOverviewMode;
     private boolean showDebugSettings;
+    private boolean fullScreen = false;
     // HTML5 API flags
     private boolean appCacheEnabled;
     private boolean databaseEnabled;
@@ -329,6 +330,9 @@ class BrowserSettings extends Observable {
         zoomDensity = WebSettings.ZoomDensity.valueOf(
                 p.getString(PREF_DEFAULT_ZOOM, zoomDensity.name()));
         autoFitPage = p.getBoolean("autofit_pages", autoFitPage);
+
+        fullScreen = p.getBoolean("full_screen_mode", fullScreen);
+
         loadsPageInOverviewMode = p.getBoolean("load_page",
                 loadsPageInOverviewMode);
         boolean landscapeOnlyTemp =
@@ -390,6 +394,10 @@ class BrowserSettings extends Observable {
         workersEnabled = p.getBoolean("enable_workers", workersEnabled);
 
         update();
+    }
+
+    public boolean isFullScreen() {
+        return fullScreen;
     }
 
     public String getHomePage() {
